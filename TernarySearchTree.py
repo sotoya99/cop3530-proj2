@@ -1,6 +1,3 @@
-from sys import prefix
-
-
 class TSTNode:
     def __init__(self, char):
         self.char = char
@@ -9,6 +6,7 @@ class TSTNode:
         self.right = None
         self.is_end_of_string = False
 
+class TST:
     def __init__(self):
         self.root = None
 
@@ -27,11 +25,11 @@ class TSTNode:
             node = TSTNode(char)
 
         if char < node.char:
-            node.left = self.insertHelper(node.left, char, index)
+            node.left = self.insertHelper(node.left, word, index)
         elif char > node.char:
-            node.right = self.insertHelper(node.right, char, index)
+            node.right = self.insertHelper(node.right, word, index)
         else:
-            if index+1 == len(word):
+            if index+1 < len(word):
                 node.mid = self.insertHelper(node.mid, word, index+1)
             else:
                 node.is_end_of_string = True
@@ -50,3 +48,30 @@ class TSTNode:
             if index == len(word)-1:
                 return node
             return self.searchHelper(node.mid, word, index+1)
+        
+    #autocomplete function
+    def autocomplete(self, prefix):
+        node = self.search(prefix)
+        if not node:
+            return []
+        
+        results = []
+        if node.is_end_of_string:
+            results.append(prefix)
+        self.collectWords(node.mid, prefix, results)
+        return results
+
+    #helper function to collect all words with a given prefix
+    def collectWords(self, node, prefix, results):
+        if not node:
+            return 
+        
+        self.collectWords(node.left, prefix, results)
+
+        next_prefix = prefix + node.char
+        if node.is_end_of_string:
+            results.append(next_prefix)
+
+        self.collectWords(node.mid, next_prefix, results)
+
+        self.collectWords(node.right, prefix, results)
