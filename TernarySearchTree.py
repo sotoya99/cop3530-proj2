@@ -6,4 +6,7 @@ class TSTNode:
         self.right = None
         self.is_end_of_string = False
 
+    def __init__(self):
+        self.root = None
+
     
