@@ -534,7 +534,6 @@ class App:
             trie_nodes = f"nodes created: {self.trie.node_count:}"
             tst_nodes = f"nodes created: {self.tst.node_count:}"
             
-            # self.results_label.config(text=f"Trie: {trie_time}, {trie_nodes} | TST: {tst_time}, {tst_nodes}")
             self.trie_results_label.config(text=f"{trie_time}, {trie_nodes}")
             self.tst_results_label.config(text=f"{tst_time}, {tst_nodes}")
             self.status_label.config(text=f"Completed")
