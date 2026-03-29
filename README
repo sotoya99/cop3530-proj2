@@ -1,2 +1,4 @@
-The main.py and words.csv are the only required files to run the program. 
-Make sure words.csv is in the same directory as main.py
+## Running the Program
+The only required files to run the program are "main.py" and "words.csv".
+There are no command line arguments required. Simply run "main.py" to start the program.
+Make sure "words.csv" is in the same directory as "main.py".
